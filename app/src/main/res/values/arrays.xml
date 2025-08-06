@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Mảng này đã có từ trước -->
+    <string-array name="expense_categories">
+        <item>Ăn uống</item>
+        <item>Di chuyển</item>
+        <item>Học tập</item>
+        <item>Giải trí</item>
+        <item>Hóa đơn and Dịch vụ</item>
+        <item>Nhà ở</item>
+        <item>Mua sắm</item>
+        <item>Sức khỏe</item>
+        <item>Khác</item>
+    </string-array>
+
+    <!-- THÊM MẢNG MỚI NÀY VÀO -->
+    <string-array name="months_array">
+        <item>Tháng 1</item>
+        <item>Tháng 2</item>
+        <item>Tháng 3</item>
+        <item>Tháng 4</item>
+        <item>Tháng 5</item>
+        <item>Tháng 6</item>
+        <item>Tháng 7</item>
+        <item>Tháng 8</item>
+        <item>Tháng 9</item>
+        <item>Tháng 10</item>
+        <item>Tháng 11</item>
+        <item>Tháng 12</item>
+    </string-array>
+</resources>

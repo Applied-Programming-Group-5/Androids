@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Dùng FrameLayout để các view có thể chồng lên nhau -->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:clipToPadding="false"
+    style="?attr/actionButtonStyle">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:src="@drawable/budget" />
+
+    <!-- Đây là dấu chấm đỏ cảnh báo -->
+    <TextView
+        android:id="@+id/budget_badge"
+        android:layout_width="10dp"
+        android:layout_height="10dp"
+        android:layout_gravity="top|end"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/badge_background"
+        android:visibility="gone" /> <!-- Mặc định sẽ ẩn -->
+</FrameLayout>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_manage_budget"
+        android:title="Quản lý Ngân sách"
+        app:showAsAction="ifRoom"
+        app:actionLayout="@layout/budget_menu_item_layout" />
+    <item
+        android:id="@+id/action_recurring_expenses"
+        android:title="Chi phí định kỳ"
+        android:icon="@drawable/ic_recurring"
+        app:showAsAction="never" />
+    <!-- Thêm item này vào trong file main_menu.xml -->
+    <item
+        android:id="@+id/action_report"
+        android:title="Báo cáo"
+        android:icon="@drawable/ic_report"
+        app:showAsAction="never" />
+    <!-- Thêm item này vào trong file main_menu.xml -->
+    <item
+        android:id="@+id/action_feedback"
+        android:title="Phản hồi and Hỗ trợ"
+        android:icon="@drawable/ic_feedback"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_logout"
+        android:title="Đăng xuất"
+        app:showAsAction="never" />
+</menu>
