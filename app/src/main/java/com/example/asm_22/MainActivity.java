@@ -84,7 +84,6 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    // ... onCreate() và các phương thức khác không thay đổi ...
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

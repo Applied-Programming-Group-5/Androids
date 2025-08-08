@@ -6,21 +6,26 @@ import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
 /**
- * Entity đại diện cho bảng 'users'.
- * Đảm bảo tên bảng là "users".
- * Thêm một 'index' để đảm bảo rằng cột 'username' là duy nhất (unique).
+ * Cập nhật Entity:
+ * - Thêm cột 'email'.
+ * - Thêm index để đảm bảo cả 'username' và 'email' đều là duy nhất.
  */
 @Entity(tableName = "users",
-        indices = {@Index(value = {"username"}, unique = true)})
+        indices = {
+                @Index(value = {"username"}, unique = true),
+                @Index(value = {"email"}, unique = true) // THÊM DÒNG NÀY
+        })
 public class User {
 
     @PrimaryKey(autoGenerate = true)
     public int id;
 
-    // Đảm bảo có cột username và password
     @ColumnInfo(name = "username")
     public String username;
 
     @ColumnInfo(name = "password")
     public String password;
+
+    @ColumnInfo(name = "email") // THÊM CỘT MỚI
+    public String email;
 }

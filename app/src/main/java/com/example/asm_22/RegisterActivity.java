@@ -1,8 +1,8 @@
 package com.example.asm_22;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Patterns;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -13,7 +13,7 @@ import java.util.concurrent.Executors;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    private TextInputEditText etUsername, etPassword, etConfirmPassword;
+    private TextInputEditText etUsername, etPassword, etConfirmPassword, etEmail; // Thêm etEmail
     private AppDatabase db;
 
     @Override
@@ -24,6 +24,7 @@ public class RegisterActivity extends AppCompatActivity {
         db = AppDatabase.getDatabase(getApplicationContext());
 
         etUsername = findViewById(R.id.edit_text_register_username);
+        etEmail = findViewById(R.id.edit_text_register_email); // Ánh xạ ô email
         etPassword = findViewById(R.id.edit_text_register_password);
         etConfirmPassword = findViewById(R.id.edit_text_register_confirm_password);
         Button btnRegister = findViewById(R.id.button_register);
@@ -35,11 +36,16 @@ public class RegisterActivity extends AppCompatActivity {
 
     private void registerUser() {
         String username = etUsername.getText().toString().trim();
+        String email = etEmail.getText().toString().trim(); // Lấy email
         String password = etPassword.getText().toString().trim();
         String confirmPassword = etConfirmPassword.getText().toString().trim();
 
-        if (TextUtils.isEmpty(username) || TextUtils.isEmpty(password)) {
-            Toast.makeText(this, "Tên đăng nhập và mật khẩu không được để trống", Toast.LENGTH_SHORT).show();
+        if (TextUtils.isEmpty(username) || TextUtils.isEmpty(email) || TextUtils.isEmpty(password)) {
+            Toast.makeText(this, "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            Toast.makeText(this, "Địa chỉ email không hợp lệ", Toast.LENGTH_SHORT).show();
             return;
         }
         if (!password.equals(confirmPassword)) {
@@ -49,21 +55,27 @@ public class RegisterActivity extends AppCompatActivity {
 
         ExecutorService executor = Executors.newSingleThreadExecutor();
         executor.execute(() -> {
-            // Kiểm tra xem username đã tồn tại chưa
             User existingUser = db.userDao().findByUsername(username);
             if (existingUser != null) {
                 runOnUiThread(() -> Toast.makeText(RegisterActivity.this, "Tên đăng nhập đã tồn tại", Toast.LENGTH_SHORT).show());
-            } else {
-                // Tạo người dùng mới
-                User newUser = new User();
-                newUser.username = username;
-                newUser.password = password; // Trong thực tế, cần mã hóa mật khẩu này
-                db.userDao().insert(newUser);
-                runOnUiThread(() -> {
-                    Toast.makeText(RegisterActivity.this, "Đăng ký thành công!", Toast.LENGTH_SHORT).show();
-                    finish(); // Quay lại màn hình đăng nhập
-                });
+                return;
             }
+
+            User existingEmail = db.userDao().findByEmail(email);
+            if (existingEmail != null) {
+                runOnUiThread(() -> Toast.makeText(RegisterActivity.this, "Email đã được sử dụng", Toast.LENGTH_SHORT).show());
+                return;
+            }
+
+            User newUser = new User();
+            newUser.username = username;
+            newUser.email = email;
+            newUser.password = password;
+            db.userDao().insert(newUser);
+            runOnUiThread(() -> {
+                Toast.makeText(RegisterActivity.this, "Đăng ký thành công!", Toast.LENGTH_SHORT).show();
+                finish();
+            });
         });
     }
 }

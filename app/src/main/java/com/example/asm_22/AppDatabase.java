@@ -6,7 +6,7 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
 // Đảm bảo version = 5 và User.class có trong entities
-@Database(entities = {Expense.class, Budget.class, RecurringExpense.class, User.class}, version = 5, exportSchema = false)
+@Database(entities = {Expense.class, Budget.class, RecurringExpense.class, User.class}, version = 6, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
 
     public abstract ExpenseDao expenseDao();

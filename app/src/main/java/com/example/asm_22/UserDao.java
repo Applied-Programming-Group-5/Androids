@@ -25,4 +25,10 @@ public interface UserDao {
      */
     @Query("SELECT * FROM users WHERE username = :username AND password = :password LIMIT 1")
     User login(String username, String password);
+
+    // Thêm phương thức này vào interface UserDao
+    @Query("SELECT * FROM users WHERE email = :email LIMIT 1")
+    User findByEmail(String email);
+    @Query("SELECT * FROM users WHERE id = :userId LIMIT 1")
+    User getById(int userId);
 }
